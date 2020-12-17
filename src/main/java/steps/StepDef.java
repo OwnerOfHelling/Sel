@@ -19,10 +19,13 @@ public class StepDef {
     public class AvitoDefs {
         protected WebDriver driver;
 
+
         @Before
         public void setUp() {
+            System.setProperty("webdriver.chrome.driver", "D:\\chromedriver\\chromedriver.exe");
             driver = new ChromeDriver();
         }
+
 
         @Пусть("открыт ресурс авито")
         public void открыт_ресурс_авито() {
@@ -30,13 +33,13 @@ public class StepDef {
         }
 
         @И("в выпадающем списке категорий выбрана {word}")
-        public void вВыпадающемСпискеКатегорийВыбранаОргтехника() {
+        public void вВыпадающемСпискеКатегорийВыбранаОргтехника(String Принтер) {
             Select choice = new Select(driver.findElement(By.xpath("//*[@id='category']")));
             choice.selectByValue("99");
         }
 
         @И("в поле поиска введено значение {word}")
-        public void вПолеПоискаВведеноЗначениеПринтер() {
+        public void вПолеПоискаВведеноЗначениеПринтер(String Принтер) {
             driver.findElement(By.xpath("//*[@id='search']")).sendKeys("Принтер");
         }
 
@@ -47,7 +50,7 @@ public class StepDef {
         }
 
         @Тогда("в поле регион введено значение {word}")
-        public void вПолеРегионВведеноЗначениеВладивосток() {
+        public void вПолеРегионВведеноЗначениеВладивосток(String Владивосток) {
             driver.findElement(By.xpath("//input[@data-marker='popup-location/region/input']")).sendKeys("Владивосток");
         }
 
@@ -75,7 +78,7 @@ public class StepDef {
         }
 
         @И("в выпадающем списке сортировка выбрано значение {word}")
-        public void вВыпадающемСпискеСортировкаВыбраноЗначениеДороже() {
+        public void вВыпадающемСпискеСортировкаВыбраноЗначениеДороже(String Дороже) {
             Select sort = new Select(driver.findElement(By.xpath("//div[2]/select")));
             sort.selectByValue("2");
         }
