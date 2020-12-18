@@ -16,7 +16,6 @@ import java.util.List;
 
 public class StepDef {
 
-    public class AvitoDefs {
         protected WebDriver driver;
 
 
@@ -56,22 +55,23 @@ public class StepDef {
 
         @И("нажата кнопка показать объявления")
         public void нажатаКнопкаПоказатьОбъявления() {
-            WebElement suggest0 = driver.findElement(By.xpath("//li[@data-marker='suggest(0)']"));
+            WebElement suggest0 = driver.findElement(By.xpath("//button[@data-marker='popup-location/save-button']"));
             suggest0.click();
         }
 
         @Тогда("открылась страница результаты по запросу принтер")
         public void открыласьСтраницаРезультатыПоЗапросуПринтер() {
             driver.get("https://www.avito.ru/vladivostok/orgtehnika_i_rashodniki?q=%D0%BF%D1%80%D0%B8%D0%BD%D1%82%D0%B5%D1%80");
-            if (driver.getTitle() != null && driver.getTitle().contains("принтер - Купить оргтехнику и расходники в Владивостоке ...")) {
+            if (driver.getTitle() != null && driver.getTitle().contains("принтер - Купить оргтехнику и расходники в Владивостоке с доставкой: принтер, сканер, МФУ, бумага | Недорогая электроника | Авито")) {
             } else {
+                System.out.println(driver.getTitle());
                 System.out.println("Открыта не та страница !");
             }
         }
 
         @И("активирован чекбокс только с фотографией")
         public void активированЧекбоксТолькоСФотографией() {
-            WebElement checkbox = driver.findElement(By.xpath("//input[@data-marker='search-form/with-images']"));
+            WebElement checkbox = driver.findElement(By.xpath("//label[2]/span"));
             if (!checkbox.isSelected()) {
                 checkbox.click();
             }
@@ -88,7 +88,7 @@ public class StepDef {
             WebElement catalog = driver.findElement(By.xpath("//div[@data-marker='catalog-serp']"));
             List<WebElement> price = catalog.findElements(By.xpath("//div[@class='iva-item-body-NPl6W']"));
             for (int i = 0; i < 3; i++) {
-                System.out.println(price.get(i).findElement(By.xpath("//span[@class='price-text-1HrJ_ text-text-1PdBw text-size-s-1PUdo']")).getText());
+                System.out.println(price.get(i).getText());
             }
         }
 
@@ -98,4 +98,3 @@ public class StepDef {
         }
 
     }
-}
